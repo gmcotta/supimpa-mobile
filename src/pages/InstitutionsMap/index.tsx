@@ -1,52 +1,23 @@
 import React, { useCallback } from 'react';
-import {
-  Dimensions,
-  StyleSheet,
-  View,
-  Text,
-  StatusBar,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
-import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
+import { StyleSheet, StatusBar } from 'react-native';
+import { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import retirementHome from '../../assets/images/retirement-home.png';
 
+import {
+  Container,
+  Map,
+  CalloutContainer,
+  CalloutText,
+  Footer,
+  FooterText,
+  CreateInstitutionButton,
+} from './styles';
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
-  calloutContainer: {
-    width: 160,
-    height: 46,
-    paddingHorizontal: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    borderRadius: 16,
-    justifyContent: 'center',
-  },
-  calloutText: {
-    color: '#0089a5',
-    fontSize: 14,
-    fontFamily: 'Montserrat_700Bold',
-  },
   footer: {
-    position: 'absolute',
-    left: 24,
-    right: 24,
-    bottom: 32,
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    height: 56,
-    paddingLeft: 24,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: {
@@ -55,18 +26,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 8,
-  },
-  footerText: {
-    color: '#8fa7b3',
-    fontFamily: 'Montserrat_700Bold',
-  },
-  createInstitutionButton: {
-    width: 56,
-    height: 56,
-    backgroundColor: '#15c3d6',
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
@@ -77,10 +36,9 @@ const InstitutionsMap: React.FC = () => {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-      <MapView
-        style={styles.map}
+      <Map
         initialRegion={{
           latitude: -23.4439484,
           longitude: -46.5257722,
@@ -101,19 +59,19 @@ const InstitutionsMap: React.FC = () => {
           }}
         >
           <Callout tooltip onPress={handleNavigateToInstitutionDetails}>
-            <View style={styles.calloutContainer}>
-              <Text style={styles.calloutText}>Oi</Text>
-            </View>
+            <CalloutContainer>
+              <CalloutText>Oi</CalloutText>
+            </CalloutContainer>
           </Callout>
         </Marker>
-      </MapView>
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>2 instituições encontradas</Text>
-        <TouchableOpacity style={styles.createInstitutionButton}>
+      </Map>
+      <Footer style={styles.footer}>
+        <FooterText>2 instituições encontradas</FooterText>
+        <CreateInstitutionButton>
           <Feather name="plus" size={20} color="#fff" />
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+        </CreateInstitutionButton>
+      </Footer>
+    </Container>
   );
 };
 
