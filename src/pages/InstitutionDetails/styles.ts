@@ -3,6 +3,12 @@ import { Dimensions } from 'react-native';
 import MapView from 'react-native-maps';
 import { RectButton } from 'react-native-gesture-handler';
 
+export const Loading = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Container = styled.ScrollView`
   flex: 1;
 `;
@@ -46,7 +52,7 @@ export const Map = styled(MapView)`
   height: 150px;
 `;
 
-export const RoutesContainer = styled.View`
+export const RoutesContainer = styled.TouchableOpacity`
   padding: 16px;
   align-items: center;
   justify-content: center;

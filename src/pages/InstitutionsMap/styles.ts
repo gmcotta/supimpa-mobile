@@ -13,7 +13,7 @@ export const Map = styled(MapView)`
 
 export const CalloutContainer = styled.View`
   width: 160px;
-  height: 46px;
+  height: 64px;
   padding: 0 16px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 16px;
