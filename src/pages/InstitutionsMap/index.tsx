@@ -62,7 +62,7 @@ const InstitutionsMap: React.FC = () => {
   );
 
   const handleNavigateToSelectMapPosition = useCallback(() => {
-    navigation.navigate('SelectMapPosition');
+    navigation.navigate('SelectInstitutionType');
   }, [navigation]);
 
   return (

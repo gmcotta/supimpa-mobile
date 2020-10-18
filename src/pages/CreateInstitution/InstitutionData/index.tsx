@@ -35,6 +35,7 @@ const InstitutionData: React.FC = () => {
   const [about, setAbout] = useState('');
   const [phone, setPhone] = useState('');
   const [instructions, setInstructions] = useState('');
+  const [retirement_or_center, setRetirementOrCenter] = useState('retirement');
   const [opening_hours, setOpeningHours] = useState('');
   const [open_on_weekends, setOpenOnWeekends] = useState(false);
   const [images, setImages] = useState<string[]>([]);
@@ -76,7 +77,7 @@ const InstitutionData: React.FC = () => {
     const data = new FormData();
     data.append('name', name);
     data.append('about', about);
-    data.append('retirement_or_center', 'retirement');
+    data.append('retirement_or_center', retirement_or_center);
     data.append('latitude', String(latitude));
     data.append('longitude', String(longitude));
     data.append('phone', phone);
@@ -97,6 +98,8 @@ const InstitutionData: React.FC = () => {
     params,
     name,
     about,
+    retirement_or_center,
+    phone,
     instructions,
     opening_hours,
     open_on_weekends,
@@ -124,7 +127,11 @@ const InstitutionData: React.FC = () => {
         />
 
         <Label>Whatsapp</Label>
-        <CustomInput value={phone} onChangeText={handlePhoneChange} />
+        <CustomInput
+          value={phone}
+          onChangeText={handlePhoneChange}
+          keyboardType="phone-pad"
+        />
 
         <Label>Fotos</Label>
         <UploadedImagesContainer>

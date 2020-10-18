@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import InstitutionsMap from './pages/InstitutionsMap';
 import InstitutionDetails from './pages/InstitutionDetails';
 
+import SelectInstitutionType from './pages/CreateInstitution/SelectInstitutionType';
 import SelectMapPosition from './pages/CreateInstitution/SelectMapPosition';
 import InstitutionData from './pages/CreateInstitution/InstitutionData';
 
@@ -42,6 +43,14 @@ const Routes: React.FC = () => {
           options={{
             headerShown: true,
             header: () => <Header title="Adicione uma instituição" />,
+          }}
+        />
+        <Screen
+          name="SelectInstitutionType"
+          component={SelectInstitutionType}
+          options={{
+            headerShown: true,
+            header: () => <Header title="Selecione o tipo da instituição" />,
           }}
         />
         <Screen

@@ -1,13 +1,21 @@
 import React, { useCallback, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { MapEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
-import mapMarkerImg from '../../../assets/images/grandma.png';
+import retirementHome from '../../../assets/images/retirement-home.png';
+import seniorCenter from '../../../assets/images/senior-center.png';
 
 import { Container, Map, NextButton, NextButtonText } from './styles';
 
+type SelectMapPositionRouteParams = {
+  retirement_or_center: string;
+};
+
 const SelectMapPosition: React.FC = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const params = route.params as SelectMapPositionRouteParams;
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
 
@@ -33,7 +41,11 @@ const SelectMapPosition: React.FC = () => {
       >
         {position.latitude !== 0 && (
           <Marker
-            icon={mapMarkerImg}
+            icon={
+              params.retirement_or_center === 'retirement'
+                ? retirementHome
+                : seniorCenter
+            }
             coordinate={{
               latitude: position.latitude,
               longitude: position.longitude,
