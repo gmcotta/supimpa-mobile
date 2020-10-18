@@ -70,7 +70,7 @@ export const ScheduleContainer = styled.View`
   justify-content: space-between;
 `;
 
-export const ScheduleItem = styled.View`
+const ScheduleItem = styled.View`
   width: 48%;
   padding: 20px;
 `;
@@ -96,7 +96,7 @@ export const ScheduleItemRed = styled(ScheduleItem)`
   border-radius: 20px;
 `;
 
-export const ScheduleText = styled.Text`
+const ScheduleText = styled.Text`
   font-family: 'Montserrat_600SemiBold';
   font-size: 16px;
   line-height: 24px;
