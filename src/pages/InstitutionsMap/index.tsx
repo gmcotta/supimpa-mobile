@@ -31,8 +31,13 @@ const styles = StyleSheet.create({
 
 const InstitutionsMap: React.FC = () => {
   const navigation = useNavigation();
+
   const handleNavigateToInstitutionDetails = useCallback(() => {
     navigation.navigate('InstitutionDetails');
+  }, [navigation]);
+
+  const handleNavigateToSelectMapPosition = useCallback(() => {
+    navigation.navigate('SelectMapPosition');
   }, [navigation]);
 
   return (
@@ -67,7 +72,7 @@ const InstitutionsMap: React.FC = () => {
       </Map>
       <Footer style={styles.footer}>
         <FooterText>2 instituições encontradas</FooterText>
-        <CreateInstitutionButton>
+        <CreateInstitutionButton onPress={handleNavigateToSelectMapPosition}>
           <Feather name="plus" size={20} color="#fff" />
         </CreateInstitutionButton>
       </Footer>
