@@ -44,7 +44,7 @@ export const ImagesInput = styled.TouchableOpacity`
   height: 56px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 32;
+  margin-bottom: 32px;
 `;
 
 export const SwitchContainer = styled.View`
