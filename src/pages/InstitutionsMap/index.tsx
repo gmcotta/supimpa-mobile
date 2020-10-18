@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import retirementHome from '../../assets/images/retirement-home.png';
 
@@ -70,6 +71,11 @@ const styles = StyleSheet.create({
 });
 
 const InstitutionsMap: React.FC = () => {
+  const navigation = useNavigation();
+  const handleNavigateToInstitutionDetails = useCallback(() => {
+    navigation.navigate('InstitutionDetails');
+  }, [navigation]);
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
@@ -94,7 +100,7 @@ const InstitutionsMap: React.FC = () => {
             y: 0.8,
           }}
         >
-          <Callout tooltip onPress={() => alert('Oi')}>
+          <Callout tooltip onPress={handleNavigateToInstitutionDetails}>
             <View style={styles.calloutContainer}>
               <Text style={styles.calloutText}>Oi</Text>
             </View>

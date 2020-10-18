@@ -8,7 +8,7 @@ import {
 
 import Routes from './src/routes';
 
-export default function App() {
+const App: React.FC = () => {
   const [fontsLoaded] = useFonts({
     Montserrat_600SemiBold,
     Montserrat_700Bold,
@@ -19,4 +19,6 @@ export default function App() {
   }
 
   return <Routes />;
-}
+};
+
+export default App;
