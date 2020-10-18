@@ -8,16 +8,50 @@ import InstitutionDetails from './pages/InstitutionDetails';
 import SelectMapPosition from './pages/CreateInstitution/SelectMapPosition';
 import InstitutionData from './pages/CreateInstitution/InstitutionData';
 
+import Header from './components/Header';
+
 const { Navigator, Screen } = createStackNavigator();
 
 const Routes: React.FC = () => {
   return (
     <NavigationContainer>
-      <Navigator screenOptions={{ headerShown: false }}>
-        <Screen name="InstitutionsMap" component={InstitutionsMap} />
-        <Screen name="InstitutionDetails" component={InstitutionDetails} />
-        <Screen name="SelectMapPosition" component={SelectMapPosition} />
-        <Screen name="InstitutionData" component={InstitutionData} />
+      <Navigator
+        screenOptions={{
+          headerShown: false,
+          cardStyle: { backgroundColor: '#f2f3f5' },
+        }}
+      >
+        <Screen
+          name="InstitutionsMap"
+          component={InstitutionsMap}
+          options={{
+            cardStyle: { backgroundColor: '#fff' },
+          }}
+        />
+        <Screen
+          name="InstitutionDetails"
+          component={InstitutionDetails}
+          options={{
+            headerShown: true,
+            header: () => <Header showCancel={false} title="Instituição" />,
+          }}
+        />
+        <Screen
+          name="SelectMapPosition"
+          component={SelectMapPosition}
+          options={{
+            headerShown: true,
+            header: () => <Header title="Adicione uma instituição" />,
+          }}
+        />
+        <Screen
+          name="InstitutionData"
+          component={InstitutionData}
+          options={{
+            headerShown: true,
+            header: () => <Header title="Informe os dados" />,
+          }}
+        />
       </Navigator>
     </NavigationContainer>
   );

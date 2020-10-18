@@ -44,7 +44,8 @@
     "prettier/prettier": "error",
     "react/style-prop-object": "off",
     "no-use-before-define": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "react/prop-types": "off"
   },
   "settings": {
     "import/resolver": {
