@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -10,10 +10,25 @@ import {
 } from 'react-native';
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
+import { useFonts } from 'expo-font';
+import {
+  Montserrat_600SemiBold,
+  Montserrat_700Bold,
+  Montserrat_800ExtraBold,
+} from '@expo-google-fonts/montserrat';
 
 import retirementHome from './src/assets/images/retirement-home.png';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
+    Montserrat_800ExtraBold,
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
@@ -74,6 +89,7 @@ const styles = StyleSheet.create({
   calloutText: {
     color: '#0089a5',
     fontSize: 14,
+    fontFamily: 'Montserrat_700Bold',
   },
   footer: {
     position: 'absolute',
@@ -98,6 +114,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     color: '#8fa7b3',
+    fontFamily: 'Montserrat_700Bold',
   },
   createInstitutionButton: {
     width: 56,
