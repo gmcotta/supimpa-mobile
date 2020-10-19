@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import InstitutionsMap from './pages/InstitutionsMap';
 import InstitutionDetails from './pages/InstitutionDetails';
+import SettingsScreen from './pages/SettingsScreen';
 
 import SelectInstitutionType from './pages/CreateInstitution/SelectInstitutionType';
 import SelectMapPosition from './pages/CreateInstitution/SelectMapPosition';
@@ -35,6 +36,14 @@ const Routes: React.FC = () => {
           options={{
             headerShown: true,
             header: () => <Header showCancel={false} title="Instituição" />,
+          }}
+        />
+        <Screen
+          name="SettingsScreen"
+          component={SettingsScreen}
+          options={{
+            headerShown: true,
+            header: () => <Header showCancel={false} title="Configurações" />,
           }}
         />
         <Screen

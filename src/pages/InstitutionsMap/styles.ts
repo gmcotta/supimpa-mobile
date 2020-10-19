@@ -53,3 +53,15 @@ export const CreateInstitutionButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
 `;
+
+export const SettingsButton = styled.TouchableOpacity`
+  position: absolute;
+  top: 72px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background-color: #15c3d6;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+`;

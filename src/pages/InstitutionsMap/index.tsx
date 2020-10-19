@@ -17,6 +17,7 @@ import {
   Footer,
   FooterText,
   CreateInstitutionButton,
+  SettingsButton,
 } from './styles';
 
 type InstitutionData = {
@@ -34,6 +35,21 @@ const InstitutionsMap: React.FC = () => {
   const [institutionQuantityText, setInstitutionQuantityText] = useState<
     string
   >('');
+
+  const handleNavigateToInstitutionDetails = useCallback(
+    (id: number) => {
+      navigation.navigate('InstitutionDetails', { id });
+    },
+    [navigation],
+  );
+
+  const handleNavigateToSelectMapPosition = useCallback(() => {
+    navigation.navigate('SelectInstitutionType');
+  }, [navigation]);
+
+  const handleNavigateToSettingsScreen = useCallback(() => {
+    navigation.navigate('SettingsScreen');
+  }, [navigation]);
 
   useFocusEffect(
     useCallback(() => {
@@ -53,17 +69,6 @@ const InstitutionsMap: React.FC = () => {
         `${institutions.length} instituições encontradas`,
       );
   }, [institutions]);
-
-  const handleNavigateToInstitutionDetails = useCallback(
-    (id: number) => {
-      navigation.navigate('InstitutionDetails', { id });
-    },
-    [navigation],
-  );
-
-  const handleNavigateToSelectMapPosition = useCallback(() => {
-    navigation.navigate('SelectInstitutionType');
-  }, [navigation]);
 
   return (
     <Container>
@@ -111,6 +116,9 @@ const InstitutionsMap: React.FC = () => {
           <Feather name="plus" size={20} color="#fff" />
         </CreateInstitutionButton>
       </Footer>
+      <SettingsButton onPress={handleNavigateToSettingsScreen}>
+        <Feather name="settings" size={20} color="#fff" />
+      </SettingsButton>
     </Container>
   );
 };
