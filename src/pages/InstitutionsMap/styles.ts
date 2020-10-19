@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import MapView from 'react-native-maps';
 
 export const Container = styled.SafeAreaView`
@@ -56,7 +56,7 @@ export const CreateInstitutionButton = styled.TouchableOpacity`
 
 export const SettingsButton = styled.TouchableOpacity`
   position: absolute;
-  top: 72px;
+  top: ${Platform.OS === 'android' ? '24px' : '72px'};
   right: 24px;
   width: 56px;
   height: 56px;
