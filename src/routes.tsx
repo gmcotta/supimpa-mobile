@@ -2,8 +2,11 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
+import { Platform } from 'react-native';
+import OnboardingScreen from './pages/OnboardingScreen';
 import InstitutionsMap from './pages/InstitutionsMap';
 import InstitutionDetails from './pages/InstitutionDetails';
+import CheckOnboardingStatus from './pages/CheckOnboardingStatus';
 import SettingsScreen from './pages/SettingsScreen';
 
 import SelectInstitutionType from './pages/CreateInstitution/SelectInstitutionType';
@@ -23,6 +26,26 @@ const Routes: React.FC = () => {
           cardStyle: { backgroundColor: '#f2f3f5' },
         }}
       >
+        <Screen
+          name="CheckOnboardingStatus"
+          component={CheckOnboardingStatus}
+          // options={{
+          //   headerShown: Platform.OS === 'ios',
+          //   headerTitle: '',
+          //   headerStatusBarHeight: 1,
+          //   cardStyle: { backgroundColor: '#d1edf2' },
+          // }}
+        />
+        <Screen
+          name="OnboardingScreen"
+          component={OnboardingScreen}
+          options={{
+            headerShown: Platform.OS === 'ios',
+            headerTitle: '',
+            headerStatusBarHeight: 1,
+            cardStyle: { backgroundColor: '#d1edf2' },
+          }}
+        />
         <Screen
           name="InstitutionsMap"
           component={InstitutionsMap}
