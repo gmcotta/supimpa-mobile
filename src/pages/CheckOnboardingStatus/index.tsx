@@ -1,24 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const CheckOnboardingStatus: React.FC = () => {
   const navigation = useNavigation();
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const checkOnboardingStatus = async () => {
-      // await AsyncStorage.clear();
       const onboardingStatus = await AsyncStorage.getItem('@ONBOARDING/status');
-      if (onboardingStatus === 'true') {
-        navigation.navigate('InstitutionsMap');
-      } else {
-        navigation.navigate('OnboardingScreen');
-      }
+      if (onboardingStatus === 'true') navigation.navigate('InstitutionsMap');
+      if (onboardingStatus === null) navigation.navigate('OnboardingScreen');
     };
     checkOnboardingStatus();
-  }, [navigation]);
+  });
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

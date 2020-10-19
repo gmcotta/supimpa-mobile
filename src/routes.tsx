@@ -29,12 +29,6 @@ const Routes: React.FC = () => {
         <Screen
           name="CheckOnboardingStatus"
           component={CheckOnboardingStatus}
-          // options={{
-          //   headerShown: Platform.OS === 'ios',
-          //   headerTitle: '',
-          //   headerStatusBarHeight: 1,
-          //   cardStyle: { backgroundColor: '#d1edf2' },
-          // }}
         />
         <Screen
           name="OnboardingScreen"
