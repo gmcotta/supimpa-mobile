@@ -33,9 +33,10 @@ export const InstitutionTypeButton = styled.TouchableOpacity<
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  border-color: #5c8599;
+  border-color: #d3e2e6;
   border-width: ${props => (props.selected ? '2px' : '1px')};
-  background-color: #fff;
+  background-color: ${props =>
+    props.selected ? '#fff' : 'rgba(255, 255, 255, 0.5)'};
 `;
 
 export const InstitutionTypeButtonText = styled.Text<

@@ -16,12 +16,13 @@ const SelectMapPosition: React.FC = () => {
   const route = useRoute();
 
   const params = route.params as SelectMapPositionRouteParams;
+  const { retirement_or_center } = params;
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
 
   const handleNextStep = useCallback(() => {
-    navigation.navigate('InstitutionData', { position });
-  }, [navigation, position]);
+    navigation.navigate('InstitutionData', { position, retirement_or_center });
+  }, [navigation, position, retirement_or_center]);
 
   const handleSelectMapPosition = useCallback((event: MapEvent) => {
     setPosition(event.nativeEvent.coordinate);
@@ -42,7 +43,7 @@ const SelectMapPosition: React.FC = () => {
         {position.latitude !== 0 && (
           <Marker
             icon={
-              params.retirement_or_center === 'retirement'
+              retirement_or_center === 'retirement'
                 ? retirementHome
                 : seniorCenter
             }

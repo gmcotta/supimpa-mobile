@@ -24,6 +24,7 @@ type InstitutionDataRouteParams = {
     latitude: number;
     longitude: number;
   };
+  retirement_or_center: string;
 };
 
 const InstitutionData: React.FC = () => {
@@ -35,7 +36,6 @@ const InstitutionData: React.FC = () => {
   const [about, setAbout] = useState('');
   const [phone, setPhone] = useState('');
   const [instructions, setInstructions] = useState('');
-  const [retirement_or_center, setRetirementOrCenter] = useState('retirement');
   const [opening_hours, setOpeningHours] = useState('');
   const [open_on_weekends, setOpenOnWeekends] = useState(false);
   const [images, setImages] = useState<string[]>([]);
@@ -73,6 +73,7 @@ const InstitutionData: React.FC = () => {
 
   const handleCreateOrphanage = useCallback(async () => {
     const { latitude, longitude } = params.position;
+    const { retirement_or_center } = params;
 
     const data = new FormData();
     data.append('name', name);
@@ -98,7 +99,6 @@ const InstitutionData: React.FC = () => {
     params,
     name,
     about,
-    retirement_or_center,
     phone,
     instructions,
     opening_hours,
