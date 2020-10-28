@@ -14,8 +14,8 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ title, showCancel = true }) => {
   const navigation = useNavigation();
 
-  function handleNavigateToOrphanagesMap() {
-    navigation.navigate('InstitutionsMap');
+  function handleNavigateToCancelScreen() {
+    navigation.navigate('CancelInstitutionCreation');
   }
 
   return (
@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ title, showCancel = true }) => {
       </BorderlessButton>
       <Title>{title}</Title>
       {showCancel ? (
-        <BorderlessButton onPress={handleNavigateToOrphanagesMap}>
+        <BorderlessButton onPress={handleNavigateToCancelScreen}>
           <Feather name="x" size={24} color="#ff669d" />
         </BorderlessButton>
       ) : (

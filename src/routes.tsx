@@ -14,6 +14,7 @@ import SelectMapPosition from './pages/CreateInstitution/SelectMapPosition';
 import InstitutionData from './pages/CreateInstitution/InstitutionData';
 import InstitutionVisitData from './pages/CreateInstitution/InstitutionVisitData';
 import InstitutionCreated from './pages/CreateInstitution/InstitutionCreated';
+import CancelInstitutionCreation from './pages/CreateInstitution/CancelInstitutionCreation';
 
 import Header from './components/Header';
 
@@ -28,14 +29,6 @@ const Routes: React.FC = () => {
           cardStyle: { backgroundColor: '#f2f3f5' },
         }}
       >
-        <Screen
-          name="InstitutionCreated"
-          component={InstitutionCreated}
-          options={{
-            headerShown: false,
-            cardStyle: { backgroundColor: '#37c77f' },
-          }}
-        />
         <Screen
           name="CheckOnboardingStatus"
           component={CheckOnboardingStatus}
@@ -103,6 +96,22 @@ const Routes: React.FC = () => {
           options={{
             headerShown: true,
             header: () => <Header title="Informe os dados" />,
+          }}
+        />
+        <Screen
+          name="InstitutionCreated"
+          component={InstitutionCreated}
+          options={{
+            headerShown: false,
+            cardStyle: { backgroundColor: '#37c77f' },
+          }}
+        />
+        <Screen
+          name="CancelInstitutionCreation"
+          component={CancelInstitutionCreation}
+          options={{
+            headerShown: false,
+            cardStyle: { backgroundColor: '#ff669d' },
           }}
         />
       </Navigator>

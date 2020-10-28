@@ -46,7 +46,7 @@ const InstitutionVisitData: React.FC = () => {
     });
 
     await api.post('/institutions', data);
-    navigation.navigate('InstitutionsMap');
+    navigation.navigate('InstitutionCreated');
   }, [institution, instructions, opening_hours, open_on_weekends, navigation]);
 
   return (

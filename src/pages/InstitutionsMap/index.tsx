@@ -53,7 +53,7 @@ const InstitutionsMap: React.FC = () => {
 
   useFocusEffect(
     useCallback(() => {
-      api.get('/institutions').then(response => {
+      api.get('/institutions?accepted=true').then(response => {
         setInstitutions(response.data);
       });
     }, []),

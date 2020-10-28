@@ -4,7 +4,7 @@ export const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding: 32px;
+  padding: 48px;
 `;
 
 export const ScreenImage = styled.Image`
