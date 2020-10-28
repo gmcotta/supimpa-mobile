@@ -1,28 +1,30 @@
 import React, { useCallback, useState } from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { MapEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+
+import { useInstitutionContext } from '../../../context/createInstitution';
 
 import retirementHome from '../../../assets/images/retirement-home.png';
 import seniorCenter from '../../../assets/images/senior-center.png';
 
 import { Container, Map, NextButton, NextButtonText } from './styles';
 
-type SelectMapPositionRouteParams = {
-  retirement_or_center: string;
-};
-
 const SelectMapPosition: React.FC = () => {
+  const { institution, setInstitution } = useInstitutionContext();
   const navigation = useNavigation();
-  const route = useRoute();
 
-  const params = route.params as SelectMapPositionRouteParams;
-  const { retirement_or_center } = params;
+  const { retirement_or_center } = institution;
 
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
 
   const handleNextStep = useCallback(() => {
-    navigation.navigate('InstitutionData', { position, retirement_or_center });
-  }, [navigation, position, retirement_or_center]);
+    setInstitution(oldValues => ({
+      ...oldValues,
+      latitude: position.latitude,
+      longitude: position.longitude,
+    }));
+    navigation.navigate('InstitutionData');
+  }, [navigation, position, setInstitution]);
 
   const handleSelectMapPosition = useCallback((event: MapEvent) => {
     setPosition(event.nativeEvent.coordinate);

@@ -6,6 +6,8 @@ import {
   Montserrat_800ExtraBold,
 } from '@expo-google-fonts/montserrat';
 
+import { InstitutionProvider } from './src/context/createInstitution';
+
 import Routes from './src/routes';
 
 const App: React.FC = () => {
@@ -18,7 +20,11 @@ const App: React.FC = () => {
     return null;
   }
 
-  return <Routes />;
+  return (
+    <InstitutionProvider>
+      <Routes />
+    </InstitutionProvider>
+  );
 };
 
 export default App;
