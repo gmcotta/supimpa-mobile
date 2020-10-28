@@ -13,6 +13,7 @@ import SelectInstitutionType from './pages/CreateInstitution/SelectInstitutionTy
 import SelectMapPosition from './pages/CreateInstitution/SelectMapPosition';
 import InstitutionData from './pages/CreateInstitution/InstitutionData';
 import InstitutionVisitData from './pages/CreateInstitution/InstitutionVisitData';
+import InstitutionCreated from './pages/CreateInstitution/InstitutionCreated';
 
 import Header from './components/Header';
 
@@ -27,6 +28,14 @@ const Routes: React.FC = () => {
           cardStyle: { backgroundColor: '#f2f3f5' },
         }}
       >
+        <Screen
+          name="InstitutionCreated"
+          component={InstitutionCreated}
+          options={{
+            headerShown: false,
+            cardStyle: { backgroundColor: '#37c77f' },
+          }}
+        />
         <Screen
           name="CheckOnboardingStatus"
           component={CheckOnboardingStatus}
