@@ -7,7 +7,7 @@ type InstitutionData = {
   name: string;
   about: string;
   phone: string;
-  images: File[];
+  images: string[];
   instructions: string;
   opening_hours: string;
   open_on_weekends: boolean;

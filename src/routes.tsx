@@ -12,6 +12,7 @@ import SettingsScreen from './pages/SettingsScreen';
 import SelectInstitutionType from './pages/CreateInstitution/SelectInstitutionType';
 import SelectMapPosition from './pages/CreateInstitution/SelectMapPosition';
 import InstitutionData from './pages/CreateInstitution/InstitutionData';
+import InstitutionVisitData from './pages/CreateInstitution/InstitutionVisitData';
 
 import Header from './components/Header';
 
@@ -82,6 +83,14 @@ const Routes: React.FC = () => {
         <Screen
           name="InstitutionData"
           component={InstitutionData}
+          options={{
+            headerShown: true,
+            header: () => <Header title="Informe os dados" />,
+          }}
+        />
+        <Screen
+          name="InstitutionVisitData"
+          component={InstitutionVisitData}
           options={{
             headerShown: true,
             header: () => <Header title="Informe os dados" />,
