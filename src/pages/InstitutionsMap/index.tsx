@@ -66,18 +66,20 @@ const InstitutionsMap: React.FC = () => {
     }, []),
   );
 
-  useEffect(() => {
-    const getAsyncStorageData = async () => {
-      const rawCoordinates = await AsyncStorage.getItem('@SUPIMPA:location');
-      if (rawCoordinates === null) {
-        navigation.navigate('LocationScreen');
-      } else {
-        const coordinates = JSON.parse(rawCoordinates);
-        setLocation(coordinates);
-      }
-    };
-    getAsyncStorageData();
-  }, [navigation]);
+  useFocusEffect(
+    useCallback(() => {
+      const getAsyncStorageData = async () => {
+        const rawCoordinates = await AsyncStorage.getItem('@SUPIMPA:location');
+        if (rawCoordinates === null) {
+          navigation.navigate('LocationScreen');
+        } else {
+          const coordinates = JSON.parse(rawCoordinates);
+          setLocation(coordinates);
+        }
+      };
+      getAsyncStorageData();
+    }, [navigation]),
+  );
 
   useEffect(() => {
     if (institutions.length <= 0)
@@ -94,7 +96,7 @@ const InstitutionsMap: React.FC = () => {
     <Container>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <Map
-        initialRegion={{
+        region={{
           latitude: location.latitude || -23.4439484,
           longitude: location.longitude || -46.5257722,
           latitudeDelta: 0.008,

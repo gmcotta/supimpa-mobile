@@ -9,6 +9,7 @@ import InstitutionDetails from './pages/InstitutionDetails';
 import CheckOnboardingStatus from './pages/CheckOnboardingStatus';
 import SettingsScreen from './pages/SettingsScreen';
 import LocationScreen from './pages/LocationScreen';
+import SettingsLocationScreen from './pages/SettingsScreen/LocationScreen';
 
 import SelectInstitutionType from './pages/CreateInstitution/SelectInstitutionType';
 import SelectMapPosition from './pages/CreateInstitution/SelectMapPosition';
@@ -68,6 +69,14 @@ const Routes: React.FC = () => {
           options={{
             headerShown: true,
             header: () => <Header showCancel={false} title="Configurações" />,
+          }}
+        />
+        <Screen
+          name="SettingsLocationScreen"
+          component={SettingsLocationScreen}
+          options={{
+            headerShown: true,
+            header: () => <Header showCancel={false} title="Localidade" />,
           }}
         />
         <Screen

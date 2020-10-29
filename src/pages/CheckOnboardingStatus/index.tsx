@@ -9,7 +9,9 @@ const CheckOnboardingStatus: React.FC = () => {
 
   useFocusEffect(() => {
     const checkOnboardingStatus = async () => {
-      const onboardingStatus = await AsyncStorage.getItem('@ONBOARDING/status');
+      const onboardingStatus = await AsyncStorage.getItem(
+        '@SUPIMPA:onboarding/finished',
+      );
       if (onboardingStatus === 'true') navigation.navigate('InstitutionsMap');
       if (onboardingStatus === null) navigation.navigate('OnboardingScreen');
     };
