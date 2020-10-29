@@ -1,13 +1,14 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { Platform, View } from 'react-native';
 
-import { Platform } from 'react-native';
 import OnboardingScreen from './pages/OnboardingScreen';
 import InstitutionsMap from './pages/InstitutionsMap';
 import InstitutionDetails from './pages/InstitutionDetails';
 import CheckOnboardingStatus from './pages/CheckOnboardingStatus';
 import SettingsScreen from './pages/SettingsScreen';
+import LocationScreen from './pages/LocationScreen';
 
 import SelectInstitutionType from './pages/CreateInstitution/SelectInstitutionType';
 import SelectMapPosition from './pages/CreateInstitution/SelectMapPosition';
@@ -38,11 +39,14 @@ const Routes: React.FC = () => {
           component={OnboardingScreen}
           options={{
             headerShown: Platform.OS === 'ios',
-            headerTitle: '',
-            headerStatusBarHeight: 1,
+            headerTitle: 'Oi',
+            header: () => (
+              <View style={{ backgroundColor: '#f2f3f5', height: 48 }} />
+            ),
             cardStyle: { backgroundColor: '#d1edf2' },
           }}
         />
+        <Screen name="LocationScreen" component={LocationScreen} />
         <Screen
           name="InstitutionsMap"
           component={InstitutionsMap}

@@ -1,9 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Text, View, TouchableOpacity, Alert } from 'react-native';
+import { StatusBar, View } from 'react-native';
+import { Picker } from '@react-native-community/picker';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
-import { Picker } from '@react-native-community/picker';
 import { useNavigation } from '@react-navigation/native';
+
+import {
+  Container,
+  Title,
+  PickerLabel,
+  CustomPicker,
+  ConfirmButton,
+  ButtonText,
+} from './styles';
 
 type IBGEStateResponse = {
   sigla: string;
@@ -19,45 +28,29 @@ type AppStateProps = {
   value: string;
 };
 
-const SettingsScreen: React.FC = () => {
+const LocationScreen: React.FC = () => {
   const navigation = useNavigation();
   const [countryStates, setCountryStates] = useState<AppStateProps[]>([]);
   const [selectedCountryState, setSelectedCountryState] = useState('');
   const [cities, setCities] = useState<AppStateProps[]>();
   const [selectedCity, setSelectedCity] = useState('');
 
-  const resetSettings = useCallback(async () => {
-    await AsyncStorage.clear();
-    Alert.alert(
-      'Redefinir Configurações',
-      'Configurações redefinidas com sucesso.',
-      [
-        {
-          text: 'OK',
-          onPress: () => navigation.navigate('CheckOnboardingStatus'),
-        },
-      ],
-    );
-  }, [navigation]);
-
-  const openPopup = useCallback(() => {
-    Alert.alert(
-      'Redefinir Configurações',
-      'Deseja redefinir as configurações do aplicativo?',
-      [
-        {
-          text: 'Não',
-          style: 'cancel',
-        },
-        {
-          text: 'Sim',
-          style: 'default',
-          onPress: () => resetSettings(),
-        },
-      ],
-      { cancelable: true },
-    );
-  }, [resetSettings]);
+  const handleFinishOnboarding = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `https://api.opencagedata.com/geocode/v1/json?key=4110b2b9c08743f7ae81570caad8a7e1&q=${selectedCity},%20${selectedCountryState}&pretty=1&limit=1`,
+      );
+      const { lat, lng } = response.data.results[0].geometry;
+      await AsyncStorage.setItem(
+        '@SUPIMPA:location',
+        JSON.stringify({ latitude: lat, longitude: lng }),
+      );
+      await AsyncStorage.setItem('@SUPIMPA:onboarding/finished', 'true');
+      navigation.navigate('InstitutionsMap');
+    } catch (error) {
+      alert(error);
+    }
+  }, [selectedCity, selectedCountryState, navigation]);
 
   useEffect(() => {
     axios
@@ -112,39 +105,45 @@ const SettingsScreen: React.FC = () => {
   }, [selectedCountryState]);
 
   return (
-    <View>
-      <Text>Configurações</Text>
-      <Text>Selecione seu estado</Text>
-      <Picker
-        selectedValue={selectedCountryState}
-        onValueChange={value => setSelectedCountryState(value)}
-      >
-        {countryStates.map(state => (
-          <Picker.Item
-            key={state.value}
-            label={state.label}
-            value={state.value}
-          />
-        ))}
-      </Picker>
-      <Text>Selecione sua cidade</Text>
-      <Picker
-        selectedValue={selectedCity}
-        onValueChange={value => setSelectedCity(value)}
-      >
-        {cities?.map(state => (
-          <Picker.Item
-            key={state.value}
-            label={state.label}
-            value={state.value}
-          />
-        ))}
-      </Picker>
-      <TouchableOpacity onPress={openPopup}>
-        <Text>Redefinir configurações</Text>
-      </TouchableOpacity>
-    </View>
+    <Container>
+      <StatusBar barStyle="dark-content" backgroundColor="#f2f3f5" />
+      <Title>Antes de começarmos, por favor, escolha sua localidade</Title>
+      <View>
+        <PickerLabel>Selecione seu estado</PickerLabel>
+        <CustomPicker
+          selectedValue={selectedCountryState}
+          onValueChange={value => setSelectedCountryState(value)}
+        >
+          {countryStates.map(state => (
+            <Picker.Item
+              key={state.value}
+              label={state.label}
+              value={state.value}
+            />
+          ))}
+        </CustomPicker>
+        <PickerLabel>Selecione sua cidade</PickerLabel>
+        <CustomPicker
+          selectedValue={selectedCity}
+          onValueChange={value => setSelectedCity(value)}
+        >
+          {cities?.map(state => (
+            <Picker.Item
+              key={state.value}
+              label={state.label}
+              value={state.value}
+            />
+          ))}
+        </CustomPicker>
+      </View>
+
+      {!!selectedCountryState && !!selectedCity && (
+        <ConfirmButton onPress={handleFinishOnboarding}>
+          <ButtonText>Confirmar localidade</ButtonText>
+        </ConfirmButton>
+      )}
+    </Container>
   );
 };
 
-export default SettingsScreen;
+export default LocationScreen;

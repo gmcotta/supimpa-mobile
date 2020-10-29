@@ -20,10 +20,10 @@ import onboardingImage from '../../assets/images/onboarding-1.png';
 const OnboardingScreen: React.FC = () => {
   const navigation = useNavigation();
 
-  const onDone = useCallback(async () => {
+  const onDone = useCallback(() => {
     try {
-      await AsyncStorage.setItem('@ONBOARDING/status', 'true');
-      navigation.navigate('InstitutionsMap');
+      // await AsyncStorage.setItem('@ONBOARDING/status', 'true');
+      navigation.navigate('LocationScreen');
     } catch (error) {
       alert('error');
     }

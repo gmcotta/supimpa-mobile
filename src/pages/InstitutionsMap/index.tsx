@@ -3,6 +3,7 @@ import { StatusBar } from 'react-native';
 import { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import retirementHome from '../../assets/images/retirement-home.png';
 import seniorCenter from '../../assets/images/senior-center.png';
@@ -28,9 +29,15 @@ type InstitutionData = {
   longitude: number;
 };
 
+type LocationData = {
+  latitude: number;
+  longitude: number;
+};
+
 const InstitutionsMap: React.FC = () => {
   const navigation = useNavigation();
 
+  const [location, setLocation] = useState<LocationData>({} as LocationData);
   const [institutions, setInstitutions] = useState<InstitutionData[]>([]);
   const [institutionQuantityText, setInstitutionQuantityText] = useState<
     string
@@ -60,6 +67,19 @@ const InstitutionsMap: React.FC = () => {
   );
 
   useEffect(() => {
+    const getAsyncStorageData = async () => {
+      const rawCoordinates = await AsyncStorage.getItem('@SUPIMPA:location');
+      if (rawCoordinates === null) {
+        navigation.navigate('LocationScreen');
+      } else {
+        const coordinates = JSON.parse(rawCoordinates);
+        setLocation(coordinates);
+      }
+    };
+    getAsyncStorageData();
+  }, [navigation]);
+
+  useEffect(() => {
     if (institutions.length <= 0)
       setInstitutionQuantityText('Nenhuma instituição encontrada');
     if (institutions.length === 1)
@@ -75,8 +95,8 @@ const InstitutionsMap: React.FC = () => {
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <Map
         initialRegion={{
-          latitude: -23.4439484,
-          longitude: -46.5257722,
+          latitude: location.latitude || -23.4439484,
+          longitude: location.longitude || -46.5257722,
           latitudeDelta: 0.008,
           longitudeDelta: 0.008,
         }}
