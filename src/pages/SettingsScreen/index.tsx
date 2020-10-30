@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Text, View, TouchableOpacity, Alert } from 'react-native';
-import axios from 'axios';
+import React, { useCallback } from 'react';
+import { Text, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { Feather } from '@expo/vector-icons';
+
+import { Container, DefaultButton, DefaultButtonText } from './styles';
 
 const SettingsScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -45,15 +47,16 @@ const SettingsScreen: React.FC = () => {
   }, [resetSettings]);
 
   return (
-    <View>
-      <Text>Configurações</Text>
-      <TouchableOpacity onPress={handleNavigateToLocation}>
-        <Text>Redefinir localidade</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={openPopup}>
-        <Text>Redefinir configurações</Text>
-      </TouchableOpacity>
-    </View>
+    <Container>
+      <DefaultButton onPress={handleNavigateToLocation}>
+        <Feather name="map-pin" size={20} color="#0089a5" />
+        <DefaultButtonText>Redefinir localidade</DefaultButtonText>
+      </DefaultButton>
+      <DefaultButton onPress={openPopup}>
+        <Feather name="x-octagon" size={20} color="#0089a5" />
+        <DefaultButtonText>Redefinir configurações</DefaultButtonText>
+      </DefaultButton>
+    </Container>
   );
 };
 

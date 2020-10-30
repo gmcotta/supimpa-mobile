@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { StatusBar, View } from 'react-native';
+import { Alert, StatusBar, View } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -45,6 +45,7 @@ const LocationScreen: React.FC = () => {
         '@SUPIMPA:location',
         JSON.stringify({ latitude: lat, longitude: lng }),
       );
+      Alert.alert('Redefinir localidade', 'Localidade alterada com sucesso!');
       navigation.goBack();
     } catch (error) {
       alert(error);
